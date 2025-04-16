@@ -1,0 +1,8 @@
+"question","answer"
+"Berapakah suhu yang stabil untuk ayam?","Sekitar 28 derajat tetapi aplikasi menyediakan kamu untuk mengatur threshold suhu secara kustom"
+"Bagaimana cara kerja aplikasi?","Aplikasi akan mendeteksi suhu di kandang kamu dan menyesuaikan intensitas cahaya lampu secara otomatis tergantung dengan suhu tersebut"
+"Untuk ayam jenis apa produk ini?","Penghangat otomatis ini diutamakan untuk anak ayam dimulai dari umur satu minggu."
+"Kenapa sensor tidak bekerja?","Cobalah untuk meniupkan udara ke sensor untuk memastikan jika mati atau tidak"
+"Bagaimana instalasi aplikasi?","Pasang aplikasi android ThermoChick yang sesuai instruksi. Aplikasi belum tersedia secara publik. Aplikasi nanti akan tersedia dengan memindai kode QR di alat Thermochick berbasis ESP32"
+"Bagaimana instalasi alat di kandang ayam?","Pasang lampu di bagian atas kandang, hubungkan mikrokontroler ESP32 dan Lampu ke sumber listrik, dan monitor di Aplikasi"
+"Bagaimana cara kerja alat?","Dengan mendeteksi suhu di DHT22, lalu tergantung threshold suhu tertentu, lampu akan menyala melalui Dimmer."
