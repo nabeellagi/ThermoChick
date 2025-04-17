@@ -22,6 +22,7 @@ ThermoChick adalah aplikasi berbasis **IoT dan AI** yang dikembangkan sebagai ba
 - ESP32 membaca data suhu dan kelembaban dari DHT22, lalu mengirimkannya ke backend menggunakan **POST method** (FastAPI).
 - Data real-time ini diambil oleh aplikasi **React Native** melalui **GET method**, lalu ditampilkan dalam tampilan dashboard.
 - Aplikasi juga melakukan **prediksi suhu** menggunakan model **Polynomial Regression** yang dilatih dari file `.csv` berisi riwayat suhu sebelumnya. Ini adalah implementasi **machine learning**.
+
 ![Tampilan Dashboard ThermoChick](screenshots/dashboard.jpg)
 
 ### B. AI Assistant
@@ -31,7 +32,8 @@ ThermoChick adalah aplikasi berbasis **IoT dan AI** yang dikembangkan sebagai ba
 - Sistem **RAG (Retrieval-Augmented Generation)** akan mencari jawaban yang relevan dari basis pengetahuan.
 - Jawaban ini dianalisis lebih lanjut menggunakan **Gemini API** generative AI, lalu ditampilkan kepada pengguna di aplikasi.
 - Semua komunikasi dilakukan melalui backend **FastAPI**. (Custom Lightweight RAG with Static Knowledge Base and Prompt Chaining)
-![Tampilan AI Assistant ThermoChick](screenshots/assistant.jpg)
+<br>
+<p align="center"> <img src="screenshots/assistant.jpg" alt="Tampilan AI Assistant ThermoChick" width="600"> </p>
 
 ### C. Grafik Monitoring
 
