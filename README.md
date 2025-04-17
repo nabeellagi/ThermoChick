@@ -53,7 +53,7 @@ ThermoChick adalah aplikasi berbasis **IoT dan AI** yang dikembangkan sebagai ba
 
 ## 🛠️ Cara Menjalankan Proyek
 
-Sebelum memulai, pastikan semua dependency sudah terinstal pada setiap komponen (FastAPI, React Native, Arduino, dan Streamlit).
+Sebelum memulai, pastikan semua dependency sudah terinstal pada setiap komponen (FastAPI, React Native, Arduino IDE untuk ESP32, dan Streamlit).
 
 ### 🔧 Langkah-Langkah Instalasi & Menjalankan
 
