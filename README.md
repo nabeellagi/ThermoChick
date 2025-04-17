@@ -21,22 +21,22 @@ ThermoChick adalah aplikasi berbasis **IoT dan AI** yang dikembangkan sebagai ba
 
 - ESP32 membaca data suhu dan kelembaban dari DHT22, lalu mengirimkannya ke backend menggunakan **POST method** (FastAPI).
 - Data real-time ini diambil oleh aplikasi **React Native** melalui **GET method**, lalu ditampilkan dalam tampilan dashboard.
-- Aplikasi juga melakukan **prediksi suhu** menggunakan model **Polynomial Regression** yang dilatih dari file `.csv` berisi riwayat suhu sebelumnya.
+- Aplikasi juga melakukan **prediksi suhu** menggunakan model **Polynomial Regression** yang dilatih dari file `.csv` berisi riwayat suhu sebelumnya. Ini adalah implementasi **machine learning**.
 ![Tampilan Dashboard ThermoChick](screenshots/dashboard.jpg)
 
 ### B. AI Assistant
 
 - Pengguna dapat mengetikkan pertanyaan di aplikasi.
-- Input ini diproses menggunakan **Sentence Transformer** untuk pencocokan semantik.
+- Input ini diproses menggunakan **Sentence Transformer** (all-MiniLM-L6-v2) untuk pencocokan semantik.
 - Sistem **RAG (Retrieval-Augmented Generation)** akan mencari jawaban yang relevan dari basis pengetahuan.
-- Jawaban ini dianalisis lebih lanjut menggunakan **Gemini API**, lalu ditampilkan kepada pengguna di aplikasi.
+- Jawaban ini dianalisis lebih lanjut menggunakan **Gemini API** generative AI, lalu ditampilkan kepada pengguna di aplikasi.
 - Semua komunikasi dilakukan melalui backend **FastAPI**.
 ![Tampilan AI Assistant ThermoChick](screenshots/assistant.jpg)
 
 ### C. Grafik Monitoring
 
 - Aplikasi menyediakan tampilan **Line Chart** untuk melihat tren suhu dan kelembaban.
-- Backend menyediakan endpoint **GET** untuk mengambil **5 data terbaru** dari file `.csv`.
+- Backend menyediakan endpoint **GET** untuk mengambil **5 data terbaru** dari file `.csv`. 
 - Data yang ditampilkan berasal dari sensor DHT22 yang terhubung ke ESP32.
 ![Tampilan AI Assistant ThermoChick](screenshots/linechart.jpg)
 
@@ -44,7 +44,11 @@ ThermoChick adalah aplikasi berbasis **IoT dan AI** yang dikembangkan sebagai ba
 
 - Sistem secara otomatis **menghidupkan atau mematikan** lampu pemanas ayam berdasarkan suhu yang dideteksi.
 - Kontrol dilakukan menggunakan **ROBOTDYN Thyristor AC** yang terhubung ke ESP32 dan dikendalikan dari backend jika suhu melewati threshold tertentu.
-
+---
+#### Lampu mati
+![Alat IoT](screenshots/IoT%20(1).png)
+#### Lampu menyala
+![Alat IoT](screenshots/IoT%20(2).png)
 ---
 
 ## 🛠️ Cara Menjalankan Proyek
