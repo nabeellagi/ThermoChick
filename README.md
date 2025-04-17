@@ -30,7 +30,7 @@ ThermoChick adalah aplikasi berbasis **IoT dan AI** yang dikembangkan sebagai ba
 - Input ini diproses menggunakan **Sentence Transformer** (all-MiniLM-L6-v2) untuk pencocokan semantik.
 - Sistem **RAG (Retrieval-Augmented Generation)** akan mencari jawaban yang relevan dari basis pengetahuan.
 - Jawaban ini dianalisis lebih lanjut menggunakan **Gemini API** generative AI, lalu ditampilkan kepada pengguna di aplikasi.
-- Semua komunikasi dilakukan melalui backend **FastAPI**.
+- Semua komunikasi dilakukan melalui backend **FastAPI**. (Custom Lightweight RAG with Static Knowledge Base and Prompt Chaining)
 ![Tampilan AI Assistant ThermoChick](screenshots/assistant.jpg)
 
 ### C. Grafik Monitoring
