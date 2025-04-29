@@ -58,7 +58,7 @@ export default function Graph() {
   };
 
   return (
-    <ScrollView className='py-8 px-4 bg-[#FFF3F0]'>
+    <ScrollView className='py-12 px-8 bg-[#FFF3F0]'>
       <Heading1>Thermochick</Heading1>
       <Title className="pt-[32px]">Lihat Grafik</Title>
 
@@ -93,6 +93,7 @@ export default function Graph() {
       ) : (
         <Text style={{ marginTop: 20 }}>Tidak ada data sensor ditemukan.</Text>
       )}
+      <View className='my-[100px]' />
     </ScrollView>
   );
 }

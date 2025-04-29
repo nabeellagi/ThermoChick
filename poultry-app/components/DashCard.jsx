@@ -44,8 +44,8 @@ export default function DashCard({children, className, number}){
             <View
                 className={className}
                 style={{
-                    width : responsiveWidth(44),
-                    height: responsiveWidth(43),
+                    width : responsiveWidth(42),
+                    height: responsiveWidth(41),
                     ...radius
                 }}
             >
@@ -61,8 +61,8 @@ export default function DashCard({children, className, number}){
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0.5, y: 2 }}
                 style={{
-                    width : responsiveWidth(44),
-                    height: responsiveWidth(43),
+                    width : responsiveWidth(42),
+                    height: responsiveWidth(41),
                     ...radius
                 }}
             >

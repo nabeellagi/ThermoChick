@@ -8,6 +8,10 @@ import {
 } from "react-native-responsive-dimensions";
 import Markdown from 'react-native-markdown-display';
 
+function CallButton(){
+  return
+}
+
 export default function AI() {
   const [query, setQuery] = useState('');
   const [response, setResponse] = useState('');
@@ -36,7 +40,7 @@ export default function AI() {
   };
 
   return (
-    <ScrollView className='py-8 px-4 bg-[#FFF3F0]'>
+    <ScrollView className='py-8 px-8 bg-[#FFF3F0]'>
       <View>
         <Heading1>
           Thermochick

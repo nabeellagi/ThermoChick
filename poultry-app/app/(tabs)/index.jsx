@@ -105,7 +105,7 @@ export default function App() {
   }  
 
   return (
-    <ScrollView className='py-8 px-4 bg-[#FFF3F0]'>
+    <ScrollView className='py-8 px-8 bg-[#FFF3F0]'>
       <View className='pb-[64px]'>
         <Heading1>
           Thermochick
@@ -136,8 +136,8 @@ export default function App() {
         {/* Primary Dashboard */}
         <View className='mt-[40px] bg-[#FEF7A8]'
         style={{
-          width : responsiveWidth(94),
-          height: responsiveWidth(94),
+          width : responsiveWidth(90),
+          height: responsiveWidth(90),
           flexDirection: 'column',
           borderTopLeftRadius: 90,
           borderTopRightRadius: 90,
@@ -213,6 +213,7 @@ export default function App() {
         <Heading1 className="pt-[32px]">
             Perbandingan
         </Heading1>
+        <View className='mb-[100px]'/>
       </View>
     </ScrollView>
   );

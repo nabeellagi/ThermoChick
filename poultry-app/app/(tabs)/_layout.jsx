@@ -1,4 +1,3 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
 import { Image } from 'expo-image';
 
@@ -8,8 +7,20 @@ export default function TabLayout() {
         {
           tabBarActiveTintColor: 'white',
           tabBarStyle: {
+            position: 'absolute',
+            margin: 12,
             backgroundColor: '#795548',
-          },
+            borderRadius: 30,
+            left: 12,
+            right: 12,
+            bottom: 12,
+            elevation: 5, // Android shadow
+            shadowColor: '#000', // iOS shadow
+            shadowOffset: { width: 0, height: 3 },
+            shadowOpacity: 0.2,
+            shadowRadius: 4,
+          }
+          
         }
       }
     >
