@@ -210,9 +210,20 @@ export default function App() {
           </View>
         </View>
         <Subtitle2 className="pt-[32px] text-center">Terkahir diperbarui : {lastUpdated}</Subtitle2>
-        <Heading1 className="pt-[32px]">
-            Perbandingan
-        </Heading1>
+        <View className='my-8'>
+          <Subtitle2 className="pt-[32px] text-center">
+              Perbandingan Suhu
+          </Subtitle2>
+          <View>
+            <Title className="text-center">{(((predict_temp - temp)/temp) * 100).toFixed(2)}%</Title>
+          </View>
+          <Subtitle2 className="pt-[32px] text-center">
+              Perbandingan Kelembapan
+          </Subtitle2>
+          <View>
+            <Title className="text-center">{(((predict_humid - humid)/humid) * 100).toFixed(2)}%</Title>
+          </View>
+        </View>
         <View className='mb-[100px]'/>
       </View>
     </ScrollView>
