@@ -4,17 +4,57 @@ import matplotlib.pyplot as plt
 from io import BytesIO
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
-from datetime import datetime, timedelta
+from datetime import timedelta
+import psycopg2
 
+# --- QuestDB Configuration ---
+QUESTDB_CONFIG = {
+    "host": "localhost",
+    "port": 8812,
+    "user": "admin",
+    "password": "quest",
+    "dbname": "qdb"
+}
+
+def get_connection():
+    return psycopg2.connect(**QUESTDB_CONFIG)
+
+# --- Predictor Class ---
 class TempHumidPredictor:
-    def __init__(self, csv_path: str, degree: int = 6):
+    def __init__(self, device_id: str, degree: int = 6, max_rows: int = 200):
+        self.device_id = device_id
+        self.table_name = self._sanitize_table_name(device_id)
         self.degree = degree
         self.poly = PolynomialFeatures(degree)
         self.temperature_model = LinearRegression()
         self.humidity_model = LinearRegression()
-        self.df = pd.read_csv(csv_path)
+        self.df = self._fetch_data(max_rows)
         self._prepare_data()
         self._train_models()
+
+    def _sanitize_table_name(self, name: str) -> str:
+        """
+        Prevents SQL injection by allowing only alphanumeric and underscore in table names.
+        """
+        import re
+        if not re.match(r'^[A-Za-z0-9_]+$', name):
+            raise ValueError("Invalid device_id: must contain only letters, numbers, and underscores")
+        return name
+
+    def _fetch_data(self, limit=200) -> pd.DataFrame:
+        query = f"""
+        SELECT timestamp, temperature, humidity
+        FROM {self.table_name}
+        ORDER BY timestamp DESC
+        LIMIT %s;
+        """
+        with get_connection() as conn:
+            df = pd.read_sql(query, conn, params=(limit,))
+
+        if df.empty:
+            raise ValueError(f"No sensor data found for device '{self.device_id}'")
+
+        return df.sort_values('timestamp')  # ensure chronological order
 
     def _prepare_data(self):
         self.df['timestamp'] = pd.to_datetime(self.df['timestamp'])
@@ -41,8 +81,7 @@ class TempHumidPredictor:
             "predicted_temperature": round(temp_pred, 2),
             "predicted_humidity": round(humid_pred, 2)
         }
-    
-    
+
     def get_plot_bytes(self) -> BytesIO:
         # Predict using the trained models
         temp_pred = self.temperature_model.predict(self.x_poly)

@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 from pydantic import BaseModel
 import requests
 
@@ -7,8 +7,12 @@ from core.sensor import save_sensor_data, get_latest_data, get_recent_sensor_dat
 router = APIRouter()
 
 class SensorData(BaseModel):
+    device_id : str
     temperature: float
     humidity: float
+
+class DataID(BaseModel):
+    device_id : str
 
 # Ubidots Configuration
 UBIDOTS_TOKEN = "BBUS-MT0TtGV0niggXIlCYujJkIMHhE1bht"
@@ -23,7 +27,7 @@ HEADERS = {
 @router.post("/sensor")
 def post_sensor_data(data: SensorData):
     # Save data locally
-    result = save_sensor_data(data.temperature, data.humidity)
+    result = save_sensor_data(data.device_id, data.temperature, data.humidity)
 
     # Prepare payload for Ubidots
     payload = {
@@ -47,14 +51,16 @@ def post_sensor_data(data: SensorData):
     }
 
 @router.get("/sensor")
-def get_sensor_data():
-    result = get_latest_data()
+def get_sensor_data(
+    device_id: str = Query(..., description="ID of the IoT device"),
+):
+    result = get_latest_data(device_id)
     return {"status": "success", "data": result}
 
-@router.get("/sensor/recent")
-def get_recent_data():
-    result = get_recent_sensor_data()
-    return {
-        "status": "success",
-        "data": result
-    }
+# @router.get("/sensor/recent")
+# def get_recent_data(data : DataID):
+#     result = get_recent_sensor_data(data.device_id)
+#     return {
+#         "status": "success",
+#         "data": result
+#     }

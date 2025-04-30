@@ -1,68 +1,127 @@
-import pandas as pd
+import psycopg2
 from datetime import datetime
-import os
 
-CSV_FILE = "data/sensor_data.csv"
-MAX_ROWS = 200  # Limit for the number of rows
+# QuestDB connection details
+QUESTDB_HOST = "localhost"
+QUESTDB_PORT = 8812
+QUESTDB_USER = "admin"
+QUESTDB_PASSWORD = "quest"
+QUESTDB_DBNAME = "qdb"
 
-def init_csv():
-    if not os.path.exists(CSV_FILE):
-        df = pd.DataFrame(columns=["timestamp", "temperature", "humidity"])
-        df.to_csv(CSV_FILE, index=False)
+MAX_ROWS = 200
 
-def save_sensor_data(temperature: float, humidity: float):
-    init_csv()
+# --- Database Connection Utility ---
+
+def get_connection():
+    return psycopg2.connect(
+        host=QUESTDB_HOST,
+        port=QUESTDB_PORT,
+        user=QUESTDB_USER,
+        password=QUESTDB_PASSWORD,
+        dbname=QUESTDB_DBNAME
+    )
+
+# --- Table Utilities ---
+def ensure_device_table(device_id: str):
+    table_name = device_id
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(f"""
+                CREATE TABLE IF NOT EXISTS {table_name} (
+                    timestamp TIMESTAMP,
+                    temperature DOUBLE,
+                    humidity DOUBLE
+                ) timestamp(timestamp);
+            """)
+            conn.commit()
+
+def clear_if_exceeds(device_id: str):
+    table_name = device_id
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(f"SELECT COUNT(*) FROM {table_name};")
+            row_count = cur.fetchone()[0]
+
+            if row_count > MAX_ROWS:
+                # Truncate the table (QuestDB supports TRUNCATE)
+                cur.execute(f"TRUNCATE TABLE {table_name};")
+                conn.commit()
+
+# --- Core Data Functions ---
+
+def save_sensor_data(device_id: str, temperature: float, humidity: float):
+    table_name = device_id
+    ensure_device_table(device_id)
     timestamp = datetime.now().isoformat()
-    
-    # Append new data
-    new_data = pd.DataFrame([{
-        "timestamp": timestamp,
-        "temperature": temperature,
-        "humidity": humidity
-    }])
-    new_data.to_csv(CSV_FILE, mode='a', header=False, index=False)
-    
-    # Clean the file if it exceeds MAX_ROWS
-    df = pd.read_csv(CSV_FILE)
-    if len(df) > MAX_ROWS:
-        # Keep only the latest MAX_ROWS
-        df = df.tail(MAX_ROWS)
-        df.to_csv(CSV_FILE, index=False)
+
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                f"INSERT INTO {table_name} (timestamp, temperature, humidity) VALUES (%s, %s, %s);",
+                (timestamp, temperature, humidity)
+            )
+            conn.commit()
+
+    clear_if_exceeds(device_id)
 
     return {
+        "device_id": device_id,
         "temperature": temperature,
         "humidity": humidity,
         "last_updated": timestamp
     }
 
-def get_latest_data():
-    init_csv()
-    df = pd.read_csv(CSV_FILE)
-    if df.empty:
-        return {"message": "No data available"}
-    last_row = df.iloc[-1]
+def get_latest_data(device_id: str):
+    table_name = device_id
+    ensure_device_table(device_id)
+
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(f"""
+                SELECT timestamp, temperature, humidity
+                FROM {table_name}
+                ORDER BY timestamp DESC
+                LIMIT 1;
+            """)
+            result = cur.fetchone()
+
+    if not result:
+        return {"message": f"No data available for {device_id}"}
+
+    timestamp, temperature, humidity = result
     return {
-        "temperature": last_row["temperature"],
-        "humidity": last_row["humidity"],
-        "last_updated": last_row["timestamp"]
+        "device_id": device_id,
+        "temperature": temperature,
+        "humidity": humidity,
+        "last_updated": timestamp.isoformat()
     }
 
-def get_recent_sensor_data(n: int = 10):
-    init_csv()
-    df = pd.read_csv(CSV_FILE)
+def get_recent_sensor_data(device_id: str, n: int = 10):
+    table_name = device_id
+    ensure_device_table(device_id)
 
-    if df.empty:
-        return {"message": "No data available"}
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(f"""
+                SELECT timestamp, temperature, humidity
+                FROM {table_name}
+                ORDER BY timestamp DESC
+                LIMIT %s;
+            """, (n,))
+            results = cur.fetchall()
 
-    # Get last n values for temperature and humidity
-    last_rows = df.tail(n)
-    temperatures = last_rows["temperature"].tolist()
-    humidities = last_rows["humidity"].tolist()
-    timestamps = last_rows["timestamp"].tolist()
+    if not results:
+        return {"message": f"No data available for {device_id}"}
+
+    timestamps, temperatures, humidities = [], [], []
+    for ts, temp, hum in reversed(results):
+        timestamps.append(ts.isoformat())
+        temperatures.append(temp)
+        humidities.append(hum)
 
     return {
+        "device_id": device_id,
         "temperatures": temperatures,
         "humidities": humidities,
         "timestamps": timestamps
     }
-
