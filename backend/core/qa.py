@@ -15,7 +15,7 @@ faq_embeddings = model.encode(faq_questions, convert_to_tensor=True)
 def generate_gemini_response(input_text: str) -> str:
     client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
     
-    model = "gemini-2.0-flash"
+    model = "gemini-2.0-flash-lite"
     contents = [
         types.Content(
             role="user",
