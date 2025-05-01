@@ -35,7 +35,7 @@ async def upload_audio(file: UploadFile = File(...)):
 
 
 # --- Cleanup function ---
-def delete_file_after_delay(file_path: Path, delay: int = 120):
+def delete_file_after_delay(file_path: Path, delay: int = 45):
     time.sleep(delay)
     if file_path.exists():
         file_path.unlink()

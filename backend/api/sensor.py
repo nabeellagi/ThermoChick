@@ -59,10 +59,12 @@ def get_sensor_data(
     result = get_latest_data(device_id)
     return {"status": "success", "data": result}
 
-# @router.get("/sensor/recent")
-# def get_recent_data(data : DataID):
-#     result = get_recent_sensor_data(data.device_id)
-#     return {
-#         "status": "success",
-#         "data": result
-#     }
+@router.get("/sensor/recent")
+def get_recent_data(
+    device_id: str = Query(..., description="ID of the IoT device"),
+):
+    result = get_recent_sensor_data(device_id)
+    return {
+        "status": "success",
+        "data": result
+    }
