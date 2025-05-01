@@ -3,7 +3,9 @@ from fastapi.responses import StreamingResponse
 from core.prediction import TempHumidPredictor
 from typing import Optional
 
-router = APIRouter()
+router = APIRouter(
+    tags=["Prediction"]
+)
 
 @router.get("/predict")
 def get_prediction(

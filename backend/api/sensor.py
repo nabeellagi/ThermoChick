@@ -4,7 +4,9 @@ import requests
 
 from core.sensor import save_sensor_data, get_latest_data, get_recent_sensor_data
 
-router = APIRouter()
+router = APIRouter(
+    tags=["Sensor"]
+)
 
 class SensorData(BaseModel):
     device_id : str
