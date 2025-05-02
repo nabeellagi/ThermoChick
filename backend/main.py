@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from api import qa, sensor, prediction, vtt
+from api import qa, sensor, prediction, vtt, userdata, weather
 from dotenv import load_dotenv
+
 load_dotenv()
 
 app = FastAPI(title="FAQ Assistant")
@@ -12,6 +13,8 @@ app.include_router(qa.router)
 app.include_router(sensor.router)
 app.include_router(prediction.router)
 app.include_router(vtt.router)
+app.include_router(userdata.router)
+app.include_router(weather.router)
 
 from fastapi.middleware.cors import CORSMiddleware
 

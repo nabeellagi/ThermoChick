@@ -8,7 +8,7 @@ QUESTDB_USER = "admin"
 QUESTDB_PASSWORD = "quest"
 QUESTDB_DBNAME = "qdb"
 
-MAX_ROWS = 200
+MAX_ROWS = 400
 
 # --- Database Connection Utility ---
 

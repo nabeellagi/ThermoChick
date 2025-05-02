@@ -21,7 +21,7 @@ def get_connection():
 
 # --- Predictor Class ---
 class TempHumidPredictor:
-    def __init__(self, device_id: str, degree: int = 6, max_rows: int = 200):
+    def __init__(self, device_id: str, degree: int = 5, max_rows: int = 200):
         self.device_id = device_id
         self.table_name = self._sanitize_table_name(device_id)
         self.degree = degree
