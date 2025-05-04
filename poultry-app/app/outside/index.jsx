@@ -72,6 +72,7 @@ export default function Outside() {
           }}
         />
       </View>
+      
       <View className='flex flex-col mx-12 pt-8 gap-12'>
         <Animated.View className="rounded-[15px] border border-black flex-row items-center justify-between px-8"
             style={{
@@ -103,6 +104,9 @@ export default function Outside() {
                 </BodyBold>
                 <Small>
                     {sensorData.pressure.interpret}
+                </Small>
+                <Small>
+                    {sensorData.text}
                 </Small>
             </View>
             <Heading1>{sensorData.pressure.mb}Mb</Heading1>
