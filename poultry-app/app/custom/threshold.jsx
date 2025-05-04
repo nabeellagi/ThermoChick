@@ -7,6 +7,7 @@ import Slider from '@react-native-community/slider';
 import { responsiveScreenWidth } from 'react-native-responsive-dimensions';
 import { Small } from '../../components/Small';
 import { Subtitle2 } from '../../components/Subtitle';
+import { Image } from 'expo-image';
 
 const StepMarkersBar = ({ min, max, step, current }) => {
     const markerCount = Math.floor((max - min) / step) + 1;
@@ -58,6 +59,7 @@ export default function ThresholdSetting() {
     const sliderStep = 1;
 
     const [threshold, setThreshold] = useState(25);
+    const [successMessage, setSuccessMessage] = useState(false);
 
     const sendThreshold = async () => {
         try {
@@ -75,6 +77,7 @@ export default function ThresholdSetting() {
             if (json.status === 'success') {
                 Vibration.vibrate(100);
                 console.log('Threshold updated successfully:', json);
+                setSuccessMessage(true);
             } else {
                 console.error('Threshold update failed:', json);
             }
@@ -129,6 +132,22 @@ export default function ThresholdSetting() {
                     <Heading2 className="text-white">Enter</Heading2>
                 </View>
             </TouchableOpacity>
+
+            {successMessage && (
+                <View className='mt-12 flex flex-col justify-center items-center'>
+                    <Subtitle2 className="text-white text-center">
+                        Berhasil!
+                    </Subtitle2>
+                    <Image
+                        source={require('../../assets/oc/search.png')}
+                        style={{
+                            width:200,
+                            height:200
+                        }}
+                    />
+                </View>
+
+            )}
 
             <Subtitle2 className="text-white pt-8">
                 *Nilai ambang batas ini akan digunakan oleh sistem untuk menyalakan atau mematikan pemanas secara otomatis.
