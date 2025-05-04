@@ -17,6 +17,8 @@ ThermoChick adalah aplikasi berbasis **IoT dan AI** yang dikembangkan sebagai ba
 
 ---
 
+<img src="poultry-app/assets/oc/search.png" alt="Image 2" width="45%"/>
+
 ## 📱 Fitur Utama
 
 ### A. Dashboard Monitoring
@@ -145,9 +147,4 @@ Sebelum memulai, pastikan semua dependency sudah terinstal pada setiap komponen 
 3. **Upload dan Jalankan Kode IoT di ESP32**  
    Buka kode dalam folder `IoT` menggunakan **Arduino IDE**, kemudian upload ke board **ESP32** yang terhubung dengan sensor DHT22 dan lampu ayam melalui ROBOTDYN Thyristor AC.
 
-4. **(Optional) Jalankan Streamlit untuk Uji Coba API**  
-   Jika ingin menguji API menggunakan antarmuka visual dengan Streamlit, masuk ke folder `streamlit` dan jalankan:
-   ```bash
-   streamlit run main.py
-   ```
-![Streamlit](screenshots/streamlit.gif)
+4. Jalan QuestDB dan Supabase
