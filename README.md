@@ -32,8 +32,8 @@ Pengguna dapat memantau suhu dan kelembaban kandang secara real-time melalui ant
 * Backend menyimpan data sensor ke dalam *QuestDB* sebagai basis data time-series.
 * Model *Polynomial Regression* dilatih menggunakan data di QuestDB untuk melakukan prediksi suhu dan kelembaban secara berkala.
 <p align="center">
-  <img src="screenshots/dashboard.jpg" width="45%" style="margin-right: 10px;"/>
-  <img src="screenshots/dashboard2.jpg" alt="Image 2" width="45%"/>
+  <img src="screenshots/dashboard.jpg" width="45%" style="margin-right: 10px;"></img>
+  <img src="screenshots/dashboard2.jpg" alt="Image 2" width="45%"></img>
 </p>
 ---
 
@@ -45,8 +45,8 @@ Fitur ini memungkinkan pengguna mengatur sendiri batas suhu yang akan memicu lam
 * ESP32 akan mengambil nilai threshold terbaru dari backend menggunakan *metode GET*.
 * Perubahan nilai threshold akan langsung ditanggapi oleh ESP32 sehingga sistem tetap adaptif terhadap konfigurasi terbaru.
 <p align="center">
-  <img src="screenshots/threshold.jpg" width="45%" style="margin-right: 10px;"/>
-  <img src="screenshots/threshold1.jpg" alt="Image 2" width="45%"/>
+  <img src="screenshots/threshold.jpg" width="45%" style="margin-right: 10px;"></img>
+  <img src="screenshots/threshold1.jpg" alt="Image 2" width="45%"></img>
 </p>
 ---
 
@@ -57,7 +57,7 @@ Lampu pemanas akan dikendalikan secara otomatis oleh sistem berdasarkan pembacaa
 * Jika suhu berada di bawah atau mendekati nilai threshold, sistem akan menyalakan lampu pemanas secara otomatis.
 * Kontrol perangkat dilakukan menggunakan *ROBOTDYN Thyristor AC* yang terhubung ke ESP32 dan dikendalikan oleh backend.
 <p align="center">
-  <img src="screenshots/lamp.jpg" width="45%" style="margin-right: 10px;"/>
+  <img src="screenshots/lamp.jpg" width="45%" style="margin-right: 10px;"></img>
 </p>
 ---
 
@@ -69,8 +69,8 @@ Pengguna dapat menentukan sendiri rentang waktu prediksi suhu dan kelembaban hin
 * Setelah dikirim, API akan memproses permintaan dan menghasilkan prediksi menggunakan data dari *QuestDB* dan model *Polynomial Regression*.
 * Hasil prediksi ditampilkan secara langsung di dalam aplikasi.
 <p align="center">
-  <img src="screenshots/prediksi1.jpg" width="45%" style="margin-right: 10px;"/>
-  <img src="screenshots/prediksi2.jpg" alt="Image 2" width="45%"/>
+  <img src="screenshots/prediksi1.jpg" width="45%" style="margin-right: 10px;"></img>
+  <img src="screenshots/prediksi2.jpg" alt="Image 2" width="45%"></img>
 </p>
 ---
 
@@ -81,8 +81,8 @@ Sensor GPS yang tertanam pada ESP32 memungkinkan aplikasi untuk mengambil inform
 * Data GPS dikirim ke backend melalui *FastAPI* dan disimpan ke *Supabase*.
 * Saat pengguna membuka halaman suhu luar, aplikasi akan mengambil data cuaca eksternal sesuai dengan lokasi terkini.
 <p align="center">
-  <img src="screenshots/luar.jpg" width="45%" style="margin-right: 10px;"/>
-  <img src="screenshots/luar1.jpg" alt="Image 2" width="45%"/>
+  <img src="screenshots/luar.jpg" width="45%" style="margin-right: 10px;"></img>
+  <img src="screenshots/luar1.jpg" alt="Image 2" width="45%"></img>
 </p>
 ---
 
@@ -95,8 +95,8 @@ Pengguna dapat berkonsultasi langsung melalui fitur AI Assistant di aplikasi, ba
 * Hasil akhir dirumuskan menggunakan *Gemini API* (generative AI) dan ditampilkan kepada pengguna.
 * Seluruh proses komunikasi dilakukan melalui backend *FastAPI* dengan pendekatan *Prompt Chaining*.
 <p align="center">
-  <img src="screenshots/assistant.jpg" width="45%" style="margin-right: 10px;"/>
-  <img src="screenshots/assistant1.jpg" alt="Image 2" width="45%"/>
+  <img src="screenshots/assistant.jpg" width="45%" style="margin-right: 10px;"></img>
+  <img src="screenshots/assistant1.jpg" alt="Image 2" width="45%"></img>
 </p>
 ---
 
@@ -118,7 +118,7 @@ Aplikasi menyediakan visualisasi grafik untuk memantau tren dan kestabilan suhu 
 * Data diambil melalui API yang terhubung langsung dengan database sensor *DHT22*.
 * Semua data sensor disimpan dan dikelola menggunakan *QuestDB* untuk efisiensi waktu dan pemrosesan data time-series.
 <p align="center">
-  <img src="screenshots/linechart.jpg" width="45%" style="margin-right: 10px;"/>
+  <img src="screenshots/linechart.jpg" width="45%" style="margin-right: 10px;"></img>
 </p>
 
 ---
