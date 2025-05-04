@@ -17,8 +17,10 @@ ThermoChick adalah aplikasi berbasis **IoT dan AI** yang dikembangkan sebagai ba
 
 ---
 <p align="center">
-<img src="poultry-app/assets/oc/search.png" alt="Image 2" width="35%"/>
+<img src="poultry-app/assets/oc/search.png" alt="Image 2" width="35%"></img>
 </p>
+
+
 ## 📱 Fitur Utama
 
 ### A. Dashboard Monitoring
