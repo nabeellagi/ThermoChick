@@ -93,7 +93,7 @@ export default function AI() {
         name: 'audio.m4a',
       });
 
-      const res = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/vtt/text-questions`, {
+      const res = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/vtt/text-questions?device_id=${process.env.EXPO_PUBLIC_DEVICE_ID}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -132,7 +132,7 @@ export default function AI() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ query }),
+        body: JSON.stringify({ query:query, device_id:process.env.EXPO_PUBLIC_DEVICE_ID }),
       });
 
       const data = await res.json();
@@ -246,7 +246,16 @@ export default function AI() {
           </Subtitle2>
 
           {loading ? (
-            <ActivityIndicator color="#3E2723" size="large" style={{ marginTop: 16 }} />
+            <View className='flex-1 items-center justify-center bg-[#FFF3F0]'>
+              <Image
+                source={require('../../assets/oc/farma_load.png')}
+                style={{
+                  width:200,
+                  height:200
+                }}
+              />
+              <Subtitle2 className='mt-4 text-[#E64A19]'>Ditunggu yaa...</Subtitle2>
+            </View>
           ) : (
             <Markdown>
               {response}

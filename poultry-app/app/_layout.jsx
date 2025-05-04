@@ -1,5 +1,6 @@
 import '../global.css';
 import { Stack } from 'expo-router/stack';
+import { Slot } from 'expo-router';
 import { useFonts } from '@expo-google-fonts/montserrat/useFonts';
 import { Montserrat_400Regular } from '@expo-google-fonts/montserrat/400Regular';
 import { Montserrat_500Medium } from '@expo-google-fonts/montserrat/500Medium';
@@ -28,11 +29,16 @@ export default function Layout() {
   }
 
   return (
+    <>
     <Stack screenOptions={{
         header: () => null
       }}
     >
       <Stack.Screen name="(tabs)" options={{ header: () => null }} />
+      <Stack.Screen name="prediction"/>
+      <Stack.Screen name="custom"/>
+      <Stack.Screen name="outside"/>
     </Stack>
+    </>
   );
 }
