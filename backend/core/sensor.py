@@ -125,3 +125,71 @@ def get_recent_sensor_data(device_id: str, n: int = 10):
         "humidities": humidities,
         "timestamps": timestamps
     }
+
+def ensure_lamp_table(device_id: str):
+    table_name = f"{device_id}lamp"
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(f"""
+                CREATE TABLE IF NOT EXISTS {table_name} (
+                    timestamp TIMESTAMP,
+                    lamp_state BOOLEAN
+                ) timestamp(timestamp);
+            """)
+            conn.commit()
+
+MAX_LAMP_ROWS = 50  # Set your threshold
+
+def save_lamp_state(device_id: str, lamp_state: bool):
+    table_name = f"{device_id}lamp"
+    ensure_lamp_table(device_id)
+    timestamp = datetime.now().isoformat()
+
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            # Insert new value
+            cur.execute(
+                f"INSERT INTO {table_name} (timestamp, lamp_state) VALUES (%s, %s);",
+                (timestamp, lamp_state)
+            )
+            conn.commit()
+
+            # Check current row count
+            cur.execute(f"SELECT COUNT(*) FROM {table_name};")
+            row_count = cur.fetchone()[0]
+
+            # If exceeds limit, truncate the table
+            if row_count > MAX_LAMP_ROWS:
+                cur.execute(f"TRUNCATE TABLE {table_name};")
+                conn.commit()
+
+    return {
+        "device_id": device_id,
+        "lamp_state": lamp_state,
+        "last_updated": timestamp
+    }
+
+
+def get_latest_lamp_state(device_id: str):
+    table_name = f"{device_id}lamp"
+    ensure_lamp_table(device_id)
+
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(f"""
+                SELECT timestamp, lamp_state
+                FROM {table_name}
+                ORDER BY timestamp DESC
+                LIMIT 1;
+            """)
+            result = cur.fetchone()
+
+    if not result:
+        return {"message": f"No lamp state data for {device_id}"}
+
+    timestamp, lamp_state = result
+    return {
+        "device_id": device_id,
+        "lamp_state": lamp_state,
+        "last_updated": timestamp.isoformat()
+    }

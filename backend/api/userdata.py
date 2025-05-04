@@ -15,6 +15,9 @@ class LocationPayload(BaseModel):
     latitude: float
     altitude: float
 
+class FireDetectionPayload(BaseModel):
+    fire_detected: bool
+
 @router.post("/temperature-set")
 def post_temperature(payload: TemperaturePayload, device_id: str = Query(...)):
     try:
@@ -56,3 +59,21 @@ def get_location(device_id: str = Query(...)):
         return {"status": "success", "data": data}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to retrieve location: {e}")
+
+@router.post("/fire-detection")
+def post_fire_detection(payload: FireDetectionPayload, device_id: str = Query(...)):
+    try:
+        data = userdata.insert_fire_detection(device_id=device_id, fire_detected=payload.fire_detected)
+        return {"status": "success", "data": data}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to insert fire detection: {e}")
+
+@router.get("/fire-detection")
+def get_fire_detection(device_id: str = Query(...)):
+    try:
+        data = userdata.get_fire_detection(device_id)
+        if not data:
+            raise HTTPException(status_code=404, detail="Fire detection data not found")
+        return {"status": "success", "data": data}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to retrieve fire detection: {e}")

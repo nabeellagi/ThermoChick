@@ -2,7 +2,7 @@ from fastapi import APIRouter, Query
 from pydantic import BaseModel
 import requests
 
-from core.sensor import save_sensor_data, get_latest_data, get_recent_sensor_data
+from core.sensor import save_sensor_data, get_latest_data, get_recent_sensor_data, save_lamp_state, get_latest_lamp_state
 
 router = APIRouter(
     tags=["Sensor"]
@@ -15,6 +15,10 @@ class SensorData(BaseModel):
 
 class DataID(BaseModel):
     device_id : str
+
+class LampData(BaseModel):
+    device_id: str
+    lamp_state: bool
 
 # Ubidots Configuration
 UBIDOTS_TOKEN = "BBUS-MT0TtGV0niggXIlCYujJkIMHhE1bht"
@@ -64,6 +68,22 @@ def get_recent_data(
     device_id: str = Query(..., description="ID of the IoT device"),
 ):
     result = get_recent_sensor_data(device_id)
+    return {
+        "status": "success",
+        "data": result
+    }
+
+@router.post("/sensor/lamp")
+def post_lamp_data(data: LampData):
+    result = save_lamp_state(data.device_id, data.lamp_state)
+    return {
+        "status": "success",
+        "data": result
+    }
+
+@router.get("/sensor/lamp")
+def get_lamp_data(device_id: str = Query(..., description="ID of the IoT device")):
+    result = get_latest_lamp_state(device_id)
     return {
         "status": "success",
         "data": result

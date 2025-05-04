@@ -52,3 +52,24 @@ def get_latest_location(device_id: str):
     if response.data:
         return response.data[0]
     return None
+
+
+def insert_fire_detection(device_id: str, fire_detected: bool):
+    data = {
+        "device_id": device_id,
+        "fire_detected": fire_detected
+    }
+    response = supabase.table("fire_detection").upsert(data, on_conflict=["device_id"]).execute()
+    return response.data
+
+def get_fire_detection(device_id: str):
+    response = (
+        supabase.table("fire_detection")
+        .select("*")
+        .eq("device_id", device_id)
+        .limit(1)
+        .execute()
+    )
+    if response.data:
+        return response.data[0]
+    return None

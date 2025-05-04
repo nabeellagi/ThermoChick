@@ -1,5 +1,5 @@
 "question","answer"
-"Berapakah suhu yang stabil untuk ayam?","Sekitar 28 derajat tetapi aplikasi menyediakan kamu untuk mengatur threshold suhu secara kustom"
+"Berapakah suhu yang stabil untuk ayam?","Sekitar 28 derajat celcius. Jika sedikit diatas, kemungkinan suhu naik dikarenakan lampu alat ini, atasi dengan menurunkan threshold menyala lampu penghangat di aplikasi. Jika dibawah maka naikkan threshold suhu agar lampu menyala lebih cepat."
 "Bagaimana cara kerja aplikasi?","Aplikasi akan mendeteksi suhu di kandang kamu dan menyesuaikan intensitas cahaya lampu secara otomatis tergantung dengan suhu tersebut"
 "Untuk ayam jenis apa produk ini?","Penghangat otomatis ini diutamakan untuk anak ayam dimulai dari umur satu minggu."
 "Kenapa sensor tidak bekerja?","Cobalah untuk meniupkan udara ke sensor untuk memastikan jika mati atau tidak"

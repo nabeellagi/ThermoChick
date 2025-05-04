@@ -1,4 +1,4 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException, BackgroundTasks
+from fastapi import APIRouter, UploadFile, File, HTTPException, BackgroundTasks, Query
 from fastapi.responses import JSONResponse
 from pathlib import Path
 from gtts import gTTS
@@ -83,6 +83,7 @@ def clean_markdown(md_text):
 @router.post("/text-questions")
 async def get_text_questions(
     background_tasks: BackgroundTasks,
+    device_id: str = Query(...),
     file: UploadFile = File(...)
 ):
     try:
@@ -102,7 +103,7 @@ async def get_text_questions(
             raise HTTPException(status_code=404, detail="Belum ada teks yang dikenali")
 
         # Get answer from semantic search
-        answer = get_faq_answer(text)
+        answer = get_faq_answer(text, device_id)
 
         # Generate TTS audio
 
