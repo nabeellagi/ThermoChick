@@ -16,9 +16,9 @@ ThermoChick adalah aplikasi berbasis **IoT dan AI** yang dikembangkan sebagai ba
 - **Gemini API + RAG Model** – Asisten AI berbasis Retrieval-Augmented Generation (RAG)
 
 ---
-
-<img src="poultry-app/assets/oc/search.png" alt="Image 2" width="45%"/>
-
+<p align="center">
+<img src="poultry-app/assets/oc/search.png" alt="Image 2" width="35%"/>
+</p>
 ## 📱 Fitur Utama
 
 ### A. Dashboard Monitoring
