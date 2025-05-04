@@ -29,7 +29,7 @@ Pengguna dapat memantau suhu dan kelembaban kandang secara real-time melalui ant
 * Model *Polynomial Regression* dilatih menggunakan data di QuestDB untuk melakukan prediksi suhu dan kelembaban secara berkala.
 <p align="center">
   <img src="screenshots/dashboard.jpg" width="45%" style="margin-right: 10px;"/>
-  <img src="screenshots/dashboard1.jpg" alt="Image 2" width="45%"/>
+  <img src="screenshots/dashboard2.jpg" alt="Image 2" width="45%"/>
 </p>
 ---
 
