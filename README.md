@@ -137,7 +137,7 @@ Aplikasi menyediakan visualisasi grafik untuk memantau tren dan kestabilan suhu 
 
 ## 🛠️ Cara Menjalankan Proyek
 
-Sebelum memulai, pastikan semua dependency sudah terinstal pada setiap komponen (FastAPI, React Native, Arduino IDE untuk ESP32, dan Streamlit).
+Sebelum memulai, pastikan semua dependency sudah terinstal pada setiap komponen (FastAPI, React Native, Arduino IDE untuk ESP32, dan database).
 
 ### 🔧 Langkah-Langkah Instalasi & Menjalankan
 
