@@ -16,6 +16,7 @@ ThermoChick adalah aplikasi berbasis **IoT dan AI** yang dikembangkan sebagai ba
 - **Gemini API + RAG Model** – Asisten AI berbasis Retrieval-Augmented Generation (RAG)
 
 ---
+
 <p align="center">
 <img src="poultry-app/assets/oc/search.png" alt="Image 2" width="35%"></img>
 </p>
@@ -35,6 +36,7 @@ Pengguna dapat memantau suhu dan kelembaban kandang secara real-time melalui ant
   <img src="screenshots/dashboard.jpg" width="45%" style="margin-right: 10px;"></img>
   <img src="screenshots/dashboard2.jpg" alt="Image 2" width="45%"></img>
 </p>
+
 ---
 
 ### B. Custom Threshold
@@ -48,6 +50,7 @@ Fitur ini memungkinkan pengguna mengatur sendiri batas suhu yang akan memicu lam
   <img src="screenshots/threshold.jpg" width="45%" style="margin-right: 10px;"></img>
   <img src="screenshots/threshold1.jpg" alt="Image 2" width="45%"></img>
 </p>
+
 ---
 
 ### C. Otomatisasi Lampu Pemanas
@@ -59,6 +62,7 @@ Lampu pemanas akan dikendalikan secara otomatis oleh sistem berdasarkan pembacaa
 <p align="center">
   <img src="screenshots/lamp.jpg" width="45%" style="margin-right: 10px;"></img>
 </p>
+
 ---
 
 ### D. Prediksi Suhu dan Kelembaban (Custom)
@@ -72,6 +76,7 @@ Pengguna dapat menentukan sendiri rentang waktu prediksi suhu dan kelembaban hin
   <img src="screenshots/prediksi1.jpg" width="45%" style="margin-right: 10px;"></img>
   <img src="screenshots/prediksi2.jpg" alt="Image 2" width="45%"></img>
 </p>
+
 ---
 
 ### E. Data Suhu dan Kelembaban Eksternal
@@ -84,6 +89,7 @@ Sensor GPS yang tertanam pada ESP32 memungkinkan aplikasi untuk mengambil inform
   <img src="screenshots/luar.jpg" width="45%" style="margin-right: 10px;"></img>
   <img src="screenshots/luar1.jpg" alt="Image 2" width="45%"></img>
 </p>
+
 ---
 
 ### F. AI Assistant
@@ -98,6 +104,7 @@ Pengguna dapat berkonsultasi langsung melalui fitur AI Assistant di aplikasi, ba
   <img src="screenshots/assistant.jpg" width="45%" style="margin-right: 10px;"></img>
   <img src="screenshots/assistant1.jpg" alt="Image 2" width="45%"></img>
 </p>
+
 ---
 
 ### G. Voice AI Assistant
@@ -149,4 +156,4 @@ Sebelum memulai, pastikan semua dependency sudah terinstal pada setiap komponen 
 3. **Upload dan Jalankan Kode IoT di ESP32**  
    Buka kode dalam folder `IoT` menggunakan **Arduino IDE**, kemudian upload ke board **ESP32** yang terhubung dengan sensor DHT22 dan lampu ayam melalui ROBOTDYN Thyristor AC.
 
-4. Jalan QuestDB dan Supabase
+4. Jalan QuestDB dan Supabase sebagai database.
