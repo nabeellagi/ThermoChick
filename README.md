@@ -130,9 +130,9 @@ Aplikasi menyediakan visualisasi grafik untuk memantau tren dan kestabilan suhu 
 
 ---
 #### Lampu mati
-![Alat IoT](screenshots/IoT%20(1).png)
+![Alat IoT](screenshots/lampu%20(1).png)
 #### Lampu menyala
-![Alat IoT](screenshots/IoT%20(2).png)
+![Alat IoT](screenshots/lampu%20(2).png)
 ---
 
 ## 🛠️ Cara Menjalankan Proyek
