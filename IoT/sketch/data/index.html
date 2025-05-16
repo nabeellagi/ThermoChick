@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ThermoChick WiFi Configuration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bulma CSS CDN -->
+  <link rel="stylesheet" href="/bulma.min.css">
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <div class="box">
+        <h1 class="title has-text-centered">🐥 ThermoFarm WiFi Setup</h1>
+        <p class="subtitle has-text-centered">Masukkan koneksi untuk tersambung dengan ThermoFarm</p>
+        <div class="has-text-centered mb-4">
+          <figure class="image is-128x128 is-inline-block">
+            <img src="/nerd.png" alt="ThermoFarm Chick Logo">
+          </figure>
+        </div>
+        <form action="/" method="POST">
+          <div class="field">
+            <label class="label">SSID</label>
+            <div class="control">
+              <input class="input" type="text" name="ssid" placeholder="Masukkan nama WiFi" required>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input class="input" type="password" name="pass" placeholder="Masukkan Password" required>
+            </div>
+          </div>
+          <div class="field is-grouped is-grouped-centered mt-5">
+            <div class="control">
+              <button class="button is-link is-medium" type="submit">💾 Save Configuration</button>
+            </div>
+          </div>
+        </form>
+        <p class="has-text-centered mt-4 is-size-7 has-text-grey">
+          © 2025 ThermoFarm — Samsung Innovation Campus
+        </p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
