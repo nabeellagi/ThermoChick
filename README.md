@@ -1,6 +1,6 @@
-# 🐣 ThermoChick
+# 🐣 ThermoFarm
 
-ThermoChick adalah aplikasi berbasis **IoT dan AI** yang dikembangkan sebagai bagian dari _Stage 4 SIC Assignment Project_. Aplikasi ini dirancang untuk membantu peternak ayam dengan **memantau suhu dan kelembaban kandang secara otomatis**, serta memberikan **dukungan asisten AI** dan **kontrol otomatis terhadap lampu pemanas** berdasarkan kondisi lingkungan.
+ThermoChick atau sekarang **THERMOFARM** adalah aplikasi berbasis **IoT dan AI** yang dikembangkan sebagai bagian dari _Stage 4 SIC Assignment Project_. Aplikasi ini dirancang untuk membantu peternak ayam dengan **memantau suhu dan kelembaban kandang secara otomatis**, serta memberikan **dukungan asisten AI** dan **kontrol otomatis terhadap lampu pemanas** berdasarkan kondisi lingkungan.
 
 ---
 
