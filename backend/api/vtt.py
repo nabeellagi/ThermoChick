@@ -1,9 +1,11 @@
+from starlette.concurrency import run_in_threadpool
 from fastapi import APIRouter, UploadFile, File, HTTPException, BackgroundTasks, Query
 from fastapi.responses import JSONResponse
 from pathlib import Path
 from gtts import gTTS
 import uuid, shutil, os, time
 import re
+from io import BytesIO
 
 from core import vtt
 from core.qa import get_faq_answer
@@ -80,6 +82,56 @@ def clean_markdown(md_text):
     return md_text
 
 
+# @router.post("/text-questions")
+# async def get_text_questions(
+#     background_tasks: BackgroundTasks,
+#     device_id: str = Query(...),
+#     file: UploadFile = File(...)
+# ):
+#     try:
+#         # Generate unique filename
+#         unique_id = uuid.uuid4().hex
+#         temp_path = Path(f"temp_{unique_id}_{file.filename}")
+
+#         # Save uploaded file temporarily
+#         with temp_path.open("wb") as buffer:
+#             shutil.copyfileobj(file.file, buffer)
+
+#         # Convert to text
+#         text = vtt.recognize_audio(temp_path)
+#         temp_path.unlink()  # Delete uploaded audio after processing
+
+#         if not text:
+#             raise HTTPException(status_code=404, detail="Belum ada teks yang dikenali")
+
+#         # Get answer from semantic search
+#         answer = get_faq_answer(text, device_id)
+
+#         # Generate TTS audio
+
+#         cleaned_answer = clean_markdown(answer)
+#         tts = gTTS(cleaned_answer, lang="id")
+#         audio_filename = f"tts_{unique_id}.mp3"
+#         audio_path = Path(f"static/audio/{audio_filename}")
+#         audio_path.parent.mkdir(parents=True, exist_ok=True)
+#         tts.save(str(audio_path))
+
+#         # Schedule cleanup in background
+#         background_tasks.add_task(delete_file_after_delay, audio_path)
+
+#         # Return result
+#         return JSONResponse(content={
+#             "text": answer,
+#             "audio_url": f"/static/audio/{audio_filename}"
+#         })
+
+#     except ValueError as ve:
+#         raise HTTPException(status_code=400, detail=str(ve))
+#     except ConnectionError as ce:
+#         raise HTTPException(status_code=503, detail=str(ce))
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=f"Internal Server Error: {e}")
+
 @router.post("/text-questions")
 async def get_text_questions(
     background_tasks: BackgroundTasks,
@@ -105,16 +157,23 @@ async def get_text_questions(
         # Get answer from semantic search
         answer = get_faq_answer(text, device_id)
 
-        # Generate TTS audio
-
+        # Clean markdown from answer
         cleaned_answer = clean_markdown(answer)
+
+        # Generate TTS in memory
         tts = gTTS(cleaned_answer, lang="id")
+        mp3_buffer = BytesIO()
+        tts.write_to_fp(mp3_buffer)
+        mp3_buffer.seek(0)
+
+        # Save buffer to disk for serving
         audio_filename = f"tts_{unique_id}.mp3"
         audio_path = Path(f"static/audio/{audio_filename}")
         audio_path.parent.mkdir(parents=True, exist_ok=True)
-        tts.save(str(audio_path))
+        with audio_path.open("wb") as f:
+            f.write(mp3_buffer.read())
 
-        # Schedule cleanup in background
+        # Schedule cleanup
         background_tasks.add_task(delete_file_after_delay, audio_path)
 
         # Return result
